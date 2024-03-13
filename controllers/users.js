@@ -8,15 +8,11 @@ const usuarios = [
     { id: 4, nombreUsuario: "Anita", email: 'anita@example.com', contrasenia: 'AnitaMaxWin' }
 ];
 
-function getUsers() {
-    return usuarios;
-}
 
 function getUserForEmail(email) {
     return usuarios.find(busqueda => busqueda.email === email);
 }
 
 module.exports = {
-    getUsers,
     getUserForEmail
 };
