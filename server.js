@@ -29,13 +29,25 @@ app.use(express.json());
 
 // Ruta para la página de inicio
 app.get('/', (req, res) => {
-    res.render('index', { title: 'Página de Bienvenida' });
+    if (req.session.usuario) {
+        //  autenticado
+        res.render('index', { title: 'Página de Bienvenida', usuario: req.session.usuario });
+      } else {
+        // no autenticado
+        res.render('index', { title: 'Página de Bienvenida', usuario: null});
+      }
 });
 
 // Ruta para el catálogo de productos
 app.get('/catalogo', (req, res) => {
-    const productos = productosController.getProductos();
-    res.render('catalogo', { title: 'Catálogo de Productos', productos });
+    if(req.session.usuario){
+        const productos = productosController.getProductos();
+        res.render('catalogo', { title: 'Catálogo de Productos', productos, usuario: req.session.usuario });
+    }else {
+        const productos = productosController.getProductos();
+        res.render('catalogo', { title: 'Catálogo de Productos', productos, usuario: null });
+    }
+
 });
 
 // Ruta para buscar productos
@@ -45,7 +57,11 @@ app.get('/buscar-producto', (req, res) => {
     const productosFiltrados = productos.filter(producto =>
         producto.nombre.toLowerCase().includes(query) || producto.descripcion.toLowerCase().includes(query)
     );
-    res.render('catalogo', { title: 'Resultados de la Búsqueda', productos: productosFiltrados });
+    if(req.session.usuario){
+        res.render('catalogo', { title: 'Resultados de la Búsqueda', productos: productosFiltrados, usuario: req.session.usuario });
+    }else{
+        res.render('catalogo', { title: 'Resultados de la Búsqueda', productos: productosFiltrados, usuario: null });
+    }
 });
 
 
@@ -59,7 +75,12 @@ app.get('/producto/:id', (req, res) => {
 // Ruta para el carrito de compra
 app.get('/carrito', (req, res) => {
     let carrito = req.session.carrito || []; // Obtiene el carrito de la sesión del usuario, si no existe, crea un nuevo carrito vacío
-    res.render('carrito', { title: 'Carrito de Compra', carrito });
+    if (req.session.usuario) {
+        //  autenticado
+        res.render('carrito', { title: 'Carrito de Compra', carrito, usuario: req.session.usuario });
+      } else {
+        res.render('carrito', { title: 'Carrito de Compra', carrito });
+      }
 });
 
 // Ruta para agregar un producto al carrito
@@ -85,7 +106,12 @@ app.post('/agregar-al-carrito/:id', (req, res) => {
 // Ruta para el detalle de compra
 app.get('/detalle-compra', (req, res) => {
     let carrito = req.session.carrito || []; // Obtiene el carrito de la sesión del usuario, si no existe, crea un nuevo carrito vacío
-    res.render('detalle-compra', { title: 'Detalle de Compra', carrito });
+
+    if(req.session.usuario){
+        res.render('detalle-compra', { title: 'Detalle de Compra', carrito, usuario: req.session.usuario});
+    }else {
+        res.render('login', { title: 'Iniciar sesión' });
+    }
 });
 
 // Ruta para actualizar la cantidad de un producto en el carrito
@@ -136,7 +162,7 @@ app.post('/procesar-compra', (req, res) => {
     // Vaciar el carrito después de procesar la compra
     req.session.carrito = [];
 
-    res.render('confirmacion-compra', { title: 'Compra Exitosa' });
+    res.render('confirmacion-compra', { title: 'Compra Exitosa', usuario: req.session.usuario});
 });
 
 
@@ -147,9 +173,30 @@ app.get('/login', (req, res) => {
 });
 
 app.post('/login', (req, res) => {
-    const email = req.body.email.toLowerCase();
-    const password = req.body.pwd.toLowerCase();
+    const email = req.body.email;
+    const password = req.body.pwd;
 
+    // Obtenemos la referencia del usuario del JSON
+    const user = usuariosController.getUserForEmail(email);
+
+    // Checamos si existe, para no generar un error
+    if(user){
+        // Aspecto que ocurre si es correcta
+        if(password == user.contrasenia){
+
+            req.session.usuario = user; // Guarda el nombre en la sesión
+            res.render('index', {title: 'Página de Bienvenida', usuario: user});
+        }else{ // Si no es correcta
+            res.render('login', { error: 'Contraseña incorrecta. Inténtalo de nuevo.' });
+        }
+    }else{
+        console.log("no existe :(");
+        res.render('login', { error: 'Usuario no encontrado. Verifica tu correo electrónico.' });
+    }
+});
+
+app.get('/close', (req, res) => {
+    res.render('index', { title: 'Página de Bienvenida', usuario: null });
 });
 
 

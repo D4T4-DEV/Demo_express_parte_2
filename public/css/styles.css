@@ -230,4 +230,29 @@ p.empty-cart {
   display: inline-block;
 }
 
+.login-form {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.inp-login {
+  margin-bottom: 10px;
+}
+
+.btn-login {
+  padding: 8px 15px;
+  margin-left: 10px;
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.btn-login:hover {
+  background-color: #555;
+}
+
 /*# sourceMappingURL=styles.css.map */

@@ -12,10 +12,17 @@ html
         li
           a(href='/catalogo') Catálogo de Productos
         li
+          if usuario 
+            p Bienvenido, #{usuario.nombreUsuario}
+          else 
+            a(href='/login') Iniciar sesión
+        li 
+          if usuario 
+            a(href="/close") Cerrar sesión 
+        li
           a#carritoEnlace(href='/carrito')  
             img#carritoImg(src="../images/carrito.png", alt="") 
             | #{carrito.length} 
-          
 
     .container
       block content

@@ -1,7 +1,13 @@
-.contenedorLogin 
-    form(action='/login', method='post')
-        input(type='text', name = 'email', placeholder='Correo', required)
+extends layout
 
-        input(type='password', name='pwd', placeholder='Contraseña', required)
+block content
+    h1 Iniciar sesión
+    form(action='/login', method='post' class='login-form')
+        input(type='text', name = 'email', placeholder='Correo', required  class='inp-login')
 
-        button(type='submit') Iniciar sesión
+        input(type='password', name='pwd', placeholder='Contraseña', required class='inp-login')
+
+        button(type='submit' class='btn-login') Iniciar sesión
+
+        if (locals.error)
+          p #{locals.error}
