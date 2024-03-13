@@ -254,11 +254,6 @@ p.empty-cart {
   background-color: #555;
 }
 
-.btnProductos {
-  display: flex;
-  justify-content: center;
-}
-
 .inp-login {
   width: 250px;
   text-align: center;
@@ -269,6 +264,11 @@ p.empty-cart {
 }
 
 .img-contenedor {
+  display: flex;
+  justify-content: center;
+}
+
+.btnProductos {
   display: flex;
   justify-content: center;
 }

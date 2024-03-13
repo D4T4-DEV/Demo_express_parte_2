@@ -125,7 +125,7 @@ app.post('/actualizar-cantidad/:id/:cantidad', (req, res) => {
         const cantidadNueva = item.cantidad + cantidad;
         if (cantidadNueva > 0 && cantidad <= producto.cantidad) {
             item.cantidad = cantidadNueva;
-            item.precio = item.cantidad * producto.precio;
+            // item.precio = item.cantidad * producto.precio;
             producto.cantidad -= cantidad;
             if (item.cantidad === 0) {
                 carrito = carrito.filter(item => item.id !== idProducto);
