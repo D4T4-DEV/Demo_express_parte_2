@@ -240,10 +240,6 @@ p.empty-cart {
   align-items: center;
 }
 
-.inp-login {
-  margin-bottom: 10px;
-}
-
 .btn-login {
   padding: 8px 15px;
   background-color: #333;
@@ -264,18 +260,17 @@ p.empty-cart {
 }
 
 .inp-login {
-  width: 200px;
+  width: 250px;
   text-align: center;
-  font-size: 14px;
+  font-size: 17px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
 }
 
 .img-contenedor {
   display: flex;
   justify-content: center;
-}
-
-#texto {
-  font-size: 150px;
 }
 
 /*# sourceMappingURL=styles.css.map */
