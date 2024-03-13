@@ -12,7 +12,10 @@ html
         li
           a(href='/catalogo') Catálogo de Productos
         li
-          a(href='/carrito') Carrito de Compra (#{carrito.length})
+          a#carritoEnlace(href='/carrito')  
+            img#carritoImg(src="../images/carrito.png", alt="") 
+            | #{carrito.length} 
+          
 
     .container
       block content

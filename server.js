@@ -3,17 +3,20 @@ const app = express();
 const session = require('express-session');
 const path = require('path');
 const productosController = require('./controllers/productos');
+const usuariosController = require('./controllers/users');
+
+app.use(express.urlencoded({ extended: true }));
 
 // Configurar middleware para manejar sesiones
 app.use(session({
-  secret: 'secreto', // Clave secreta para firmar la cookie de sesión
-  resave: false,
-  saveUninitialized: true
+    secret: 'secreto', // Clave secreta para firmar la cookie de sesión
+    resave: false,
+    saveUninitialized: true
 }));
 
 app.use((req, res, next) => {
-  res.locals.carrito = req.session.carrito || [];
-  next();
+    res.locals.carrito = req.session.carrito || [];
+    next();
 });
 
 // Configuración de la plantilla Pug
@@ -27,7 +30,7 @@ app.use(express.json());
 // Ruta para la página de inicio
 app.get('/', (req, res) => {
     res.render('index', { title: 'Página de Bienvenida' });
-}); 
+});
 
 // Ruta para el catálogo de productos
 app.get('/catalogo', (req, res) => {
@@ -55,34 +58,34 @@ app.get('/producto/:id', (req, res) => {
 
 // Ruta para el carrito de compra
 app.get('/carrito', (req, res) => {
-  let carrito = req.session.carrito || []; // Obtiene el carrito de la sesión del usuario, si no existe, crea un nuevo carrito vacío
+    let carrito = req.session.carrito || []; // Obtiene el carrito de la sesión del usuario, si no existe, crea un nuevo carrito vacío
     res.render('carrito', { title: 'Carrito de Compra', carrito });
 });
 
 // Ruta para agregar un producto al carrito
 app.post('/agregar-al-carrito/:id', (req, res) => {
-  const idProducto = req.params.id;
-  const producto = productosController.getProductoPorId(idProducto);
-  if (producto && producto.cantidad > 0) {
-      let carrito = req.session.carrito || [];
-      let productoEnCarrito = carrito.find(item => item.id === idProducto);
-      if (productoEnCarrito) {
-          productoEnCarrito.cantidad++;
-      } else {
-          carrito.push({ id: idProducto, nombre: producto.nombre, precio: producto.precio, cantidad: 1 });
-      }
-      producto.cantidad--;
-      req.session.carrito = carrito;
-      res.redirect('/catalogo');
-  } else {
-      res.status(404).send('Producto no encontrado o no disponible');
-  }
+    const idProducto = req.params.id;
+    const producto = productosController.getProductoPorId(idProducto);
+    if (producto && producto.cantidad > 0) {
+        let carrito = req.session.carrito || [];
+        let productoEnCarrito = carrito.find(item => item.id === idProducto);
+        if (productoEnCarrito) {
+            productoEnCarrito.cantidad++;
+        } else {
+            carrito.push({ id: idProducto, nombre: producto.nombre, precio: producto.precio, cantidad: 1 });
+        }
+        producto.cantidad--;
+        req.session.carrito = carrito;
+        res.redirect('/catalogo');
+    } else {
+        res.status(404).send('Producto no encontrado o no disponible');
+    }
 });
 
 // Ruta para el detalle de compra
 app.get('/detalle-compra', (req, res) => {
     let carrito = req.session.carrito || []; // Obtiene el carrito de la sesión del usuario, si no existe, crea un nuevo carrito vacío
-    res.render('detalle-compra', { title: 'Detalle de Compra', carrito});
+    res.render('detalle-compra', { title: 'Detalle de Compra', carrito });
 });
 
 // Ruta para actualizar la cantidad de un producto en el carrito
@@ -113,11 +116,11 @@ app.post('/eliminar-del-carrito/:id', (req, res) => {
     let carrito = req.session.carrito || []; // Obtiene el carrito de la sesión del usuario, si no existe, crea un nuevo carrito vacío
     const itemIndex = carrito.findIndex(item => item.id === idProducto);
     if (itemIndex !== -1) {
-      const removedItem = carrito.splice(itemIndex, 1)[0];
-      const producto = productosController.getProductoPorId(idProducto);
-      if (producto) {
-        producto.cantidad += removedItem.cantidad; // Modifica la cantidad del producto en stock
-      }
+        const removedItem = carrito.splice(itemIndex, 1)[0];
+        const producto = productosController.getProductoPorId(idProducto);
+        if (producto) {
+            producto.cantidad += removedItem.cantidad; // Modifica la cantidad del producto en stock
+        }
     }
     req.session.carrito = carrito; // Actualiza el carrito en la sesión
     res.redirect('/carrito');
@@ -132,10 +135,24 @@ app.post('/procesar-compra', (req, res) => {
 
     // Vaciar el carrito después de procesar la compra
     req.session.carrito = [];
-    
+
     res.render('confirmacion-compra', { title: 'Compra Exitosa' });
 });
-  
+
+
+// Codigo hecho por mi 
+
+app.get('/login', (req, res) => {
+    res.render('login', { title: 'Iniciar sesión' });
+});
+
+app.post('/login', (req, res) => {
+    const email = req.body.email.toLowerCase();
+    const password = req.body.pwd.toLowerCase();
+
+});
+
+
 // Puerto en el que escucha el servidor
 const port = 3000;
 app.listen(port, () => {

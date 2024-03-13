@@ -219,4 +219,15 @@ p.empty-cart {
   margin-top: 20px;
 }
 
+#carritoImg {
+  width: 100%;
+  height: 100%;
+  max-width: 1.5rem;
+}
+
+#carritoEnlace {
+  text-align: center;
+  display: inline-block;
+}
+
 /*# sourceMappingURL=styles.css.map */
