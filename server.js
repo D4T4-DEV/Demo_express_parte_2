@@ -5,7 +5,7 @@ const path = require('path');
 const productosController = require('./controllers/productos');
 const usuariosController = require('./controllers/users');
 
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true })); // Medio para obtener los datos del formulario
 
 // Configurar middleware para manejar sesiones
 app.use(session({
@@ -197,7 +197,7 @@ app.post('/login', (req, res) => {
     }
 });
 
-// Aspecto para que se deslogue el usuario 
+// Aspecto para que se cerrar sesion 
 app.get('/close', (req, res) => {
     req.session.usuario = null;
     res.render('index', { title: 'Página de Bienvenida', usuario: null });
