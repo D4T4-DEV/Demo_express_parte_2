@@ -168,10 +168,12 @@ app.post('/procesar-compra', (req, res) => {
 
 // Codigo hecho por mi 
 
+// Aspectos para loguearse
 app.get('/login', (req, res) => {
     res.render('login', { title: 'Iniciar sesión' });
 });
 
+// Cuando se presiona el btn este medio se activa (obtiene los datos del formulario)
 app.post('/login', (req, res) => {
     const email = req.body.email;
     const password = req.body.pwd;
@@ -195,7 +197,9 @@ app.post('/login', (req, res) => {
     }
 });
 
+// Aspecto para que se deslogue el usuario 
 app.get('/close', (req, res) => {
+    req.session.usuario = null;
     res.render('index', { title: 'Página de Bienvenida', usuario: null });
 });
 

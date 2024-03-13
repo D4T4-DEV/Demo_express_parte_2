@@ -8,20 +8,28 @@ html
     nav
       ul
         li
-          a(href='/') Inicio
+          a#inicio(href='/') 
+            img#iconosImg(src="../images/inicio.png", alt="Inicio") 
+            | Inicio
         li
-          a(href='/catalogo') Catálogo de Productos
+          a#productos(href='/catalogo') 
+            img#iconosImg(src="../images/productos.png", alt="productos") 
+            | Productos
         li
           if usuario 
-            p Bienvenido, #{usuario.nombreUsuario}
+            p Hola, #{usuario.nombreUsuario}
           else 
-            a(href='/login') Iniciar sesión
+            a#iniciarSesion(href='/login') 
+              img#iconosImg(src="../images/login.png", alt="iniciar sesión") 
+              | Iniciar sesión
         li 
           if usuario 
-            a(href="/close") Cerrar sesión 
+            a#iniciarSesion(href="/close")
+              img#iconosImg(src="../images/closeSesion.png", alt="cerrar sesión") 
+              | Cerrar sesión
         li
           a#carritoEnlace(href='/carrito')  
-            img#carritoImg(src="../images/carrito.png", alt="") 
+            img#iconosImg(src="../images/carrito.png", alt="carrito de compras") 
             | #{carrito.length} 
 
     .container
