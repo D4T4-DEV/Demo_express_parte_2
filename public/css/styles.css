@@ -272,6 +272,20 @@ p.empty-cart {
   justify-content: center;
 }
 
+.btn-agregar-produc {
+  padding: 8px 15px;
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-size: 14px;
+}
+.btn-agregar-produc:hover {
+  background-color: #555;
+}
+
 .btn-elm {
   background-color: #FF0000;
 }

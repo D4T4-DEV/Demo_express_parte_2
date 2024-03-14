@@ -14,6 +14,6 @@ block content
           p Precio: $#{producto.precio}
           .btnProductos
             form(action=`/agregar-al-carrito/${producto.id}`, method='POST')
-              button(type='submit') Agregar al carrito
+              button(type='submit' class='btn-agregar-produc') Agregar al carrito
   else
     p No se encontraron resultados.
