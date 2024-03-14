@@ -9,5 +9,13 @@ block content
 
         button(type='submit' class='btn-login') Iniciar sesión
 
+        p Usa el siguiente medio de logueo para probar la función de logueo: 
+        p
+          strong email: 
+          |root@example.com
+        p 
+          strong contraseña: 
+          |rootTumbaLaCasa
+
         if (locals.error)
           p #{locals.error}

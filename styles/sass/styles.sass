@@ -64,7 +64,7 @@ table
   button
     padding: 5px 10px
     margin-right: 5px
-    background-color: #333
+    // background-color: #333
     color: white
     border: none
     border-radius: 5px
@@ -88,6 +88,7 @@ table
   color: white
   border: none
   cursor: pointer
+  border-radius: 5px
 
   &:hover
     background-color: #45a049
@@ -125,7 +126,7 @@ p.empty-cart
 
 .producto-container
   display: grid
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr))
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr))
   gap: 20px
 
 .producto
@@ -153,9 +154,6 @@ p.empty-cart
     border-radius: 5px
     cursor: pointer
 
-    &:hover
-      background-color: #555
-
 .button-container
   display: flex
   justify-content: space-evenly
@@ -174,6 +172,7 @@ p.empty-cart
 .button-confirm
   background-color: #4CAF50
   color: white
+  border-radius: 5px
 
 .button-cancel
   background-color: #f44336
@@ -182,6 +181,7 @@ p.empty-cart
 .button-return
   background-color: #008CBA
   color: white
+  border-radius: 5px
 
 .button-confirm:hover,
 .button-cancel:hover,
@@ -200,7 +200,6 @@ p.empty-cart
   text-align: center
   margin-top: 20px
 
-
 // Aspectos agregados por mi 
 
 // Imagen del carrito
@@ -209,8 +208,7 @@ p.empty-cart
   height: 60%
   max-width: 1.5rem
 
-
-#carritoEnlace, #inicio, 
+#carritoEnlace, #inicio,
 #productos, #iniciarSesion,
 #iniciarSesion
   text-align: center
@@ -227,17 +225,17 @@ p.empty-cart
 
 // Btn del login (formulario)
 .btn-login
-    padding: 8px 15px
-    background-color: #333
-    color: white
-    border: none
-    border-radius: 5px
-    cursor: pointer
-    transition: background-color 0.3s
-    font-size: 14px
+  padding: 8px 15px
+  background-color: #333
+  color: white
+  border: none
+  border-radius: 5px
+  cursor: pointer
+  transition: background-color 0.3s
+  font-size: 14px
 
-    &:hover
-      background-color: #555
+  &:hover
+    background-color: #555
 
 // Estilos del input del login 
 .inp-login
@@ -258,3 +256,20 @@ p.empty-cart
 .btnProductos
   display: flex
   justify-content: center
+
+// estilos del btn de carrito de compra
+.btn-elm
+  background-color: #FF0000
+
+  &:hover
+    background-color: #a01111
+
+.btn-res
+  background-color: #8c8c8c
+  &:hover
+    background-color: #555854
+
+.btn-aniadir
+  background-color: #00913f
+  &:hover
+    background-color: #55af2e
