@@ -192,7 +192,7 @@ app.post('/login', (req, res) => {
             res.render('login', { error: 'Contraseña incorrecta. Inténtalo de nuevo.' });
         }
     }else{
-        console.log("no existe :(");
+        // Si no existe el correo en el JSON
         res.render('login', { error: 'Usuario no encontrado. Verifica tu correo electrónico.' });
     }
 });
