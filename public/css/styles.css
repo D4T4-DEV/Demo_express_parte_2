@@ -289,22 +289,13 @@ p.empty-cart {
 .btn-elm {
   background-color: #FF0000;
 }
-.btn-elm:hover {
-  background-color: #a01111;
-}
 
 .btn-res {
   background-color: #8c8c8c;
 }
-.btn-res:hover {
-  background-color: #555854;
-}
 
 .btn-aniadir {
   background-color: #00913f;
-}
-.btn-aniadir:hover {
-  background-color: #55af2e;
 }
 
 /*# sourceMappingURL=styles.css.map */
