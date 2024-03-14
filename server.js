@@ -31,10 +31,10 @@ app.use(express.json());
 app.get('/', (req, res) => {
     if (req.session.usuario) {
         //  autenticado
-        res.render('index', { title: 'Página de Bienvenida', usuario: req.session.usuario });
+        res.render('index', { title: 'Bienvenido a memeWorld', usuario: req.session.usuario });
       } else {
         // no autenticado
-        res.render('index', { title: 'Página de Bienvenida', usuario: null});
+        res.render('index', { title: 'Bienvenido a memeWorld', usuario: null});
       }
 });
 
@@ -187,7 +187,7 @@ app.post('/login', (req, res) => {
         if(password == user.contrasenia){
 
             req.session.usuario = user; // Guarda el nombre en la sesión
-            res.render('index', {title: 'Página de Bienvenida', usuario: user});
+            res.render('index', {title: 'Bienvenido a memeWorld', usuario: user});
         }else{ // Si no es correcta
             res.render('login', { error: 'Contraseña incorrecta. Inténtalo de nuevo.' });
         }
@@ -200,7 +200,7 @@ app.post('/login', (req, res) => {
 // Aspecto para que se cerrar sesion 
 app.get('/close', (req, res) => {
     req.session.usuario = null;
-    res.render('index', { title: 'Página de Bienvenida', usuario: null });
+    res.render('index', { title: 'Bienvenido a memeWorld', usuario: null });
 });
 
 
